@@ -5,3 +5,6 @@
  This project is purely an API service, all front-end and UI integrations for this project is managed by other applications. 
 
  Implementation of this project is being covered in the Home automation tutorial on my website (http://www.kranous.com/projects/home_automation/homeAutomation_00.html)
+
+**IMPORTANT**
+This is not a production ready application. If you run it, it should not be exposed to internet. There is MINIMAL security built into this API in it's current form
