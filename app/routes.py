@@ -1,6 +1,7 @@
 from tempfile import TemporaryFile
 from flask import render_template, jsonify, request
-from app import app
+from flask import redirect, url_for
+from app import app, db
 from app.models import Recipe, Ingredient, Steps
 
 
@@ -74,6 +75,68 @@ def get_recipe(id):
 
 @app.route('/api/recipes/<int:id>', methods=['PUT'])
 def update_recipe(id):
+
+    data = request.get_json() or {}
+    print(data)
+    r = Recipe.query.get_or_404(id)
+    if 'ingredients' in data:
+        print("HELLO")
+        ingredients = data['ingredients']
+        print(type(ingredients))
+        return jsonify(ingredients)
+
+    r.from_dict(data)
+    db.session.commit()
+
+    print(data)
+
+    # Return Success Message once done with Debugging
+    return get_recipe(id)
+
+
+@app.route('/api/recipes/<int:id>/ingredients', methods=['GET'])
+def get_ingredients(id):
+
+    ingredients = Ingredient.query.filter_by(recipe_id=id).all()
+    ingredient_list = []
+    for i in ingredients:
+        ingredient_list.append(i.to_dict())
+    
+    return jsonify(ingredient_list)
+    
+
+@app.route('/api/recipes/<int:recipe_id>/ingredients/<int:ingredient_id>', methods=['PUT'])
+def update_ingredients(recipe_id, ingredient_id):
     
     data = request.get_json() or {}
-    pass
+    i = Ingredient.query.get_or_404(ingredient_id)
+    i.from_dict(data)
+    db.session.commit()
+
+    # Return Success Message once done with Debugging
+    return get_recipe(recipe_id)
+
+
+@app.route('/api/recipes/<int:recipe_id>/directions', methods=['GET'])
+def get_directions(recipe_id):
+
+    directions = Steps.query.filter_by(recipe_id=recipe_id).all()
+    direction_list =[]
+    for step in directions:
+        direction_list.append(step.to_dict())
+
+    return jsonify(direction_list)
+
+
+@app.route('/api/recipes/<int:recipe_id>/directions/<int:direction_id>', methods=['PUT'])
+def update_directions(recipe_id, direction_id):
+
+    data = request.get_json() or {}
+    direction = Steps.query.get_or_404(direction_id)
+
+    direction.from_dict(data)
+    db.session.commit()
+
+    # Return success message once done with debugging
+    return get_recipe(recipe_id)
+

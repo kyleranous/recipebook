@@ -54,12 +54,18 @@ class Ingredient(db.Model):
 
     def to_dict(self):
         data = {
+            'id': self.id,
             'ingredient': self.ingredient,
             'qty': self.qty,
             'unit': self.unit
         }
 
         return data
+
+    def from_dict(self, data):
+        for field in ['ingredient', 'qty', 'unit']:
+            if field in data:
+                setattr(self, field, data[field])
 
 
 class Steps(db.Model):
@@ -73,8 +79,14 @@ class Steps(db.Model):
     
     def to_dict(self):
         data = {
+            "id": self.id,
             "step_number": self.step_number,
             "step_text": self.step_text
         }
 
         return data
+
+    def from_dict(self, data):
+        for field in ['step_number', 'step_text']:
+            if field in data:
+                setattr(self, field, data[field])

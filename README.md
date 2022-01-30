@@ -13,5 +13,14 @@ This is not a production ready application. If you run it, it should not be expo
 ## To Do
 - [] Write Function to return paginated Recipe list
 - [] Write function to add new recipe to database
-- [] Write function to modify recipe
+- [x] Write function to modify recipe
+    - [x] Modify Recipe Summary
+    - [x] Modify Recipe Ingredients
+    - [x] Modify Recipe Directions
+- [] Write Function to Delete Recipe
+    - [] Delete Recipe Summary
+        If Recipe summary is deleted, then All Ingredients and Directions should be deleted also
+    - [] Delete Recipe Ingredient
+    - [] Delete Recipe Direction Step
+        If a step is removed, other steps need to be updated with new step number
 - [] More documentation
