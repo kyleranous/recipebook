@@ -57,6 +57,7 @@ class Ingredient(db.Model):
 
         return data
 
+
 class Steps(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'))
@@ -65,3 +66,11 @@ class Steps(db.Model):
 
     def __repr__(self):
         return f'{self.step_number}. {self.step_text}'
+    
+    def to_dict(self):
+        data = {
+            "step_number": self.step_number,
+            "step_text": self.step_text
+        }
+
+        return data
