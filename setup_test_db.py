@@ -1,5 +1,5 @@
 from app import db
-from app.models import Recipe, Ingredient
+from app.models import Recipe, Ingredient, Steps
 import datetime
 
 #Check if Test Recipe 1 Exists and pull it if it does
@@ -39,3 +39,16 @@ if len(r.ingredients.all()) == 0:
     db.session.commit()
 else:
     print('Ingredients for Recipe 1 exist')
+
+if len(r.directions.all()) == 0:
+    #Create Directions for Test Recipe 1
+    print('Creating Directions for Recipe 1')
+    d1 = Steps(recipe_id=r.id, step_number=1, step_text='Pre-Heat Oven to 1M Degrees')
+    db.session.add(d1)
+    d2 = Steps(recipe_id=r.id, step_number=2, step_text='Down 3 shots of vodka')
+    db.session.add(d2)
+    d3 = Steps(recipe_id=r.id, step_number=3, step_text='Forget what you are doing and order a pizza')
+    db.session.add(d3)
+    db.session.commit()
+else:
+    print('Directions List for Recipe 1 Exists')
