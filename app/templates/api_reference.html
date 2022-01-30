@@ -1,11 +1,46 @@
  {% extends "base.html" %}
 
- {{% block content %}
+ {% block content %}
  <h1>Recipe Book API</h1>
  <p>
-     all_recipes - GET
+     api/recipies - GET
  </p>
  <p>
-     recipe/[recipe id] - GET
+     api.recipies - POST
+
+<pre>
+<code>{
+'recipe_name': 'STRING',
+'description': 'STRING',
+'servings': INT,
+'prep_time': INT (in seconds),
+'cook_time': INT (in seconds),
+'ingredients':  [
+                  {
+                    'ingredient': STRING,
+                    'qty': FLOAT,
+                    'unit': STRING
+                  },
+                  {
+                    ...
+                  },
+                  ...
+                ],
+'directions': [
+                {
+                  'step_number': INT,
+                  'step_text': STRING
+                },
+                {
+                  ...
+                },
+                ...
+              ]
+}
+</code>
+</pre>
+ </p>
+ <p>
+     api/recipes/[recipe id] - GET
  </p>
 {% endblock %}

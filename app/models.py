@@ -35,7 +35,11 @@ class Recipe(db.Model):
         }
 
         return summary
-        
+    
+    def from_dict(self, data):
+        for field in ['recipe_name', 'servings', 'prep_time', 'cook_time', 'description']:
+            if field in data:
+                setattr(self, field, data[field])
 
 
 class Ingredient(db.Model):

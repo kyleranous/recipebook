@@ -8,3 +8,10 @@
 
 **IMPORTANT**
 This is not a production ready application. If you run it, it should not be exposed to internet. There is MINIMAL security built into this API in it's current form
+
+
+## To Do
+- [] Write Function to return paginated Recipe list
+- [] Write function to add new recipe to database
+- [] Write function to modify recipe
+- [] More documentation

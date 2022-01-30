@@ -1,5 +1,5 @@
 from tempfile import TemporaryFile
-from flask import render_template, jsonify
+from flask import render_template, jsonify, request
 from app import app
 from app.models import Recipe, Ingredient, Steps
 
@@ -10,13 +10,32 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/api/all_recipes', methods=['GET'])
+@app.route('/api-reference')
+def api_reference():
+    return render_template('api_reference.html', title='API Reference')
+
+
+# API ROUTES
+@app.route('/api/recipes', methods=['GET'])
 def get_all_recipes():
+    
+    r = Recipe.query.all()
+    
+    # Return Pagified List of Recipes in Database
+    return jsonify({'message': 'This would be a list of all the recipes'})
+
+
+@app.route('/api/recipies', methods=['POST'])
+def add_recipe():
+
+    # Add a new recipe to the Database
+    data = request.get_json() or {}
     pass
 
 
-@app.route('/api/recipe/<int:id>', methods=['GET'])
+@app.route('/api/recipes/<int:id>', methods=['GET'])
 def get_recipe(id):
+
     # Find the Recipe with matching ID
     try:
         r = Recipe.query.get(id).to_dict()
@@ -49,5 +68,12 @@ def get_recipe(id):
     for step in d:
         steps.append(step.to_dict())
     r["directions"] = steps
-    
+
     return jsonify(r)
+
+
+@app.route('/api/recipes/<int:id>', methods=['PUT'])
+def update_recipe(id):
+    
+    data = request.get_json() or {}
+    pass
