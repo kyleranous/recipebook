@@ -1,6 +1,7 @@
+from tempfile import TemporaryFile
 from flask import render_template, jsonify
 from app import app
-from app.models import Recipe, Ingredient
+from app.models import Recipe, Ingredient, Steps
 
 
 @app.route('/')
@@ -35,7 +36,18 @@ def get_recipe(id):
     for item in i:
         ingredients.append(item.to_dict())
     r["ingredients"] = ingredients
-    print(r["ingredients"])
+    
     # If the Recipe and Ingredients have been found query the steps
+    try:
+        d = Steps.query.filter_by(recipe_id=id).all()
 
+    except: # If No Steps Found - return error message
+        return jsonify({"error": f"No Directions for Recipe {id}"})
+
+    # Add Directions to recipe dict
+    steps = []
+    for step in d:
+        steps.append(step.to_dict())
+    r["directions"] = steps
+    
     return jsonify(r)
