@@ -10,8 +10,25 @@
 This is not a production ready application. If you run it, it should not be exposed to internet. There is MINIMAL security built into this API in it's current form
 
 
+## Road Map
+ - Search Integration - Search by Recipe Name or Ingredients. Ingredient Search should allow for AND OR and EXCLUDE. IE Search For Recipes that have Chicken but no Mushrooms
+ ```Python
+
+# Search for sub string
+Model.query.filter(Model.columnName.contains('sub string'))
+
+# Search for recipes that contain or items
+Model.query.filter(or_(Model.columnName == v for v in ['item1', 'item2', 'item3']))
+
+# Exclude an item from a search
+Model.query.filter(not_(Model.columnName.contains('sub string')))
+
+ ```
+
+ - Share Recipe - Send formatted recipe through an e-mail
+
 ## To Do
-- [ ] Write Function to return paginated Recipe list
+- [x] Write Function to return paginated Recipe list
 - [x] Write function to add new recipe to database
 - [x] Write function to modify recipe
     - [x] Modify Recipe Summary

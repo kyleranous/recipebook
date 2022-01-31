@@ -1,8 +1,33 @@
+from flask import url_for
 from app import db
 import datetime as dt
 
 
-class Recipe(db.Model):
+class PaginatedAPIMixin(object):
+    @staticmethod
+    def to_collection(query, page, per_page, endpoint, **kwargs):
+        resources = query.paginate(page, per_page, False)
+        data = {
+            'items': [item.summary() for item in resources.items],
+            '_meta': {
+                'page': page,
+                'total_pages': resources.pages,
+                'total_items': resources.total
+            },
+            '_links': {
+                'self': url_for(endpoint, page=page, per_page=per_page,
+                                **kwargs),
+                'next': url_for(endpoint, page=page + 1, per_page=per_page,
+                                **kwargs) if resources.has_next else None,
+                'prev': url_for(endpoint, page=page - 1, per_page=per_page,
+                                **kwargs) if resources.has_prev else None
+            }
+        }
+        return data
+
+
+
+class Recipe(PaginatedAPIMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     recipe_name = db.Column(db.String(128), index=True)
     servings = db.Column(db.Integer)

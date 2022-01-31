@@ -21,10 +21,11 @@ def api_reference():
 @app.route('/api/recipes', methods=['GET'])
 def get_all_recipes():
     
-    r = Recipe.query.all()
-    
-    # Return Pagified List of Recipes in Database
-    return jsonify({'message': 'This would be a list of all the recipes'})
+    page = request.args.get('page', 1, type=int)
+    per_page = min(request.args.get('per_page', 10, type=int), 100)
+    data = Recipe.to_collection(Recipe.query, page, per_page, 'get_all_recipes')
+
+    return jsonify(data)
 
 
 @app.route('/api/recipes', methods=['POST'])

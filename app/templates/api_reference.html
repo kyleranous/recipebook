@@ -1,46 +1,93 @@
  {% extends "base.html" %}
 
  {% block content %}
- <h1>Recipe Book API</h1>
- <p>
-     api/recipies - GET
- </p>
- <p>
-     api.recipies - POST
+ <div style="width: 50%; margin: 0 auto;">
+<h1>Recipe Book API</h1>
+<h1>Overview</h1>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at facilisis augue. Pellentesque elementum viverra tellus vitae commodo. Ut tempus neque eu convallis volutpat. Cras eu augue elit. Proin posuere interdum vulputate. Sed non ornare sapien, quis pellentesque diam. Nulla lorem magna, pulvinar a velit non, aliquet lobortis arcu. Vivamus venenatis sodales fermentum. Pellentesque tempor et dui nec hendrerit. Vestibulum vitae enim vel metus imperdiet mollis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut et lacus blandit, commodo purus laoreet, eleifend urna. Duis non semper lacus. Proin augue nisi, semper at euismod a, feugiat nec nisi. Nulla egestas mi iaculis, mattis ipsum vel, accumsan nisl.
+  </p>
+  <p>
+    Nunc non interdum elit, et feugiat eros. Aliquam erat volutpat. Vivamus pretium ornare dui nec ullamcorper. Nullam iaculis sed eros suscipit imperdiet. Etiam mollis scelerisque condimentum. Vivamus nisi mauris, volutpat id aliquam eget, feugiat sit amet mauris. Praesent ultricies porttitor lacus, vel dignissim leo dignissim sed. Duis convallis nunc quis ex efficitur egestas. Nunc urna risus, scelerisque vitae cursus sit amet, sagittis non quam.
+  </p>
 
-<pre>
+<h1>End Points</h1>  
+ <div style="margin: 10px;">
+    <h2>Endpoint: api/recipes</h2>
+      <div style="margin: 10px">
+      <h3>Method: GET</h3>
+        <div style="margin: 10px"
+        <h4>What it does</h4>
+        <p>
+          Returns a list of all recipes in paginated form. 
+        </p>
+        <h4>Message to send</h4>
+          <p>
+            <ul>
+              <li><strong>page=[int]</strong>: <i>Optional</i> Page of the results. Default Value = 1</li>
+              <li><strong>per_page=[int]</strong>: <i>Optional</i> Number of Results per Page. Default Value = 10, Max Value = 100</li>
+            </ul>
+            <strong>Example:</strong><br>
+            <code style="color:rgb(112, 8, 31)">http://localhost:5000/api/recipes?page=1&per_page=5</code><br>
+            The above request would send the first page of results, with 5 results per page.
+          </p> 
+        <h4>Response</h4>
+        <p>
+          JSON Object:<br>
+          <pre style="background-color: lightgray;">
+  <code>{
+    "_links": {
+      "next": "address to next page of results",
+      "prev": "address to previous page of results",
+      "self": "address to current page of results"
+    },
+    "_meta": {
+      "page": [Current Page Number],
+      "total_items": [Total Recipes in Query],
+      "total_pages": [Total Pages in request]
+    },
+    "items": [
+      {
+        "id": [Recipe ID],
+        "recipe_name": "Name of Recipe",
+        "time": [Total Prep and Cook Time]
+      }
+    ]
+  }
+          </code></pre>
+        </p>
+        </div></div>
+
+  </div>
+  <div style="margin: 10px;">
+    <h3>Method: POST</h3>
+      <h4>What it does</h4>
+        <p>
+          Adds a New Recipe To the database 
+        </p>
+        <h4>Message to send</h4>
+          <p>
+            <ul>
+              <li><strong>#</strong>: </li>
+              <li><strong>#</strong>: </li>
+            </ul>
+            <strong>Example:</strong><br>
+            <pre style="background-color: lightgray;">
 <code>{
-'recipe_name': 'STRING',
-'description': 'STRING',
-'servings': INT,
-'prep_time': INT (in seconds),
-'cook_time': INT (in seconds),
-'ingredients':  [
-                  {
-                    'ingredient': STRING,
-                    'qty': FLOAT,
-                    'unit': STRING
-                  },
-                  {
-                    ...
-                  },
-                  ...
-                ],
-'directions': [
-                {
-                  'step_number': INT,
-                  'step_text': STRING
-                },
-                {
-                  ...
-                },
-                ...
-              ]
+
+}</code></pre>
+          </p> 
+        <h4>Response</h4>
+        <p>
+          JSON Object:<br>
+          <pre style="background-color: lightgray;">
+<code>{
+    
 }
-</code>
-</pre>
- </p>
- <p>
-     api/recipes/[recipe id] - GET
- </p>
+</code></pre>
+        </p>
+
+  </div>
+
+</div>
 {% endblock %}
