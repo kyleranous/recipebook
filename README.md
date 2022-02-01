@@ -4,11 +4,13 @@
 
  This project is purely an API service, all front-end and UI integrations for this project is managed by other applications. 
 
- Implementation of this project is being covered in the Home automation tutorial on my website (http://www.kranous.com/projects/home_automation/homeAutomation_00.html)
+ Implementation of this project is being covered in the Home automation tutorial on my [website](http://www.kranous.com/projects/home_automation/homeAutomation_00.html)
 
 **IMPORTANT**
-This is not a production ready application. If you run it, it should not be exposed to internet. There is MINIMAL security built into this API in it's current form
+This is not a production ready application. If you run it, it should not be exposed to internet. There is MINIMAL security built into this API in it's current form.
+<br>
 
+Veiw the [API Documentation](docs/api_reference.md) - *In Process*
 
 ## Road Map
  - Search Integration - Search by Recipe Name or Ingredients. Ingredient Search should allow for AND OR and EXCLUDE. IE Search For Recipes that have Chicken but no Mushrooms
@@ -27,6 +29,7 @@ Model.query.filter(not_(Model.columnName.contains('sub string')))
 
  - Share Recipe - Send formatted recipe through an e-mail
 
+
 ## To Do
 - [x] Write Function to return paginated Recipe list
 - [x] Write function to add new recipe to database
@@ -39,6 +42,6 @@ Model.query.filter(not_(Model.columnName.contains('sub string')))
         If Recipe summary is deleted, then All Ingredients and Directions should be deleted also
     - [x] Delete Recipe Ingredient
     - [x] Delete Recipe Direction Step
-- [ ] Conduct Code Review
+- [ ] Conduct Code Review (*in process*)
     - [ ] Change All references to directions to steps...or change steps to directions
-- [ ] More documentation
+- [ ] More documentation (*in process*)
