@@ -81,7 +81,7 @@ def add_recipe():
 
     db.session.commit()
 
-    return get_recipe(r.id)
+    return get_recipe(r.id) # Update Return to return a success method 
 
 
 @app.route('/api/recipes/<int:id>', methods=['GET'])
